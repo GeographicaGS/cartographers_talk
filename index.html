@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+<title>Cartographer's talk</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<!-- General and theme style sheets -->
+<link rel="stylesheet" href="reveal.js/css/reveal.css">
+<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+}
+
+</script>
+
+<!--[if lt IE 9]>
+<script src="reveal.js/lib/js/html5shiv.js"></script>
+<![endif]-->
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+.reveal {
+  font-size: 160%;
+  overflow-y: scroll;
+}
+.reveal pre {
+  width: inherit;
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace, sans-serif;
+  font-size: 80%;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.reveal pre code {
+  padding: 0px;
+}
+.reveal section img {
+  border: 0px solid black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+}
+.reveal i {
+  font-style: normal;
+  font-family: FontAwesome;
+  font-size: 2em;
+}
+.reveal .slides {
+  text-align: left;
+}
+.reveal.fade {
+  opacity: 1;
+}
+.reveal .progress {
+  position: static;
+}
+div.input_area {
+  padding: 0.06em;
+}
+div.code_cell {
+  background-color: transparent;
+}
+div.prompt {
+  width: 11ex;
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace, sans-serif;
+  font-size: 80%;
+  text-align: right;
+}
+div.output_area pre {
+  font-family: monospace, sans-serif;
+  font-size: 80%;
+}
+div.output_prompt {
+  /* 5px right shift to account for margin in parent container */
+  margin: 5px 5px 0 0;
+}
+div.text_cell.rendered .rendered_html {
+  /* The H1 height seems miscalculated, we are just hidding the scrollbar */
+  overflow-y: hidden;
+}
+a.anchor-link {
+  /* There is still an anchor, we are only hidding it */
+  display: none;
+}
+.rendered_html p {
+  text-align: inherit;
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="custom.css">
+
+</head>
+
+<body>
+    <div class="reveal">
+    <div class="slides">
+    <section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h1 id="Cartographers talk">Cartographer's talk</h1><p>Sevilla - Geographica Hammer 2018-09-27</p>
+    <ul>
+    <li>Pedro-Juan Ferrer · <a href="http://twitter.com/vehrka">@vehrka</a></li>
+    </ul>
+
+    </div>
+    </div>
+    </div></section></section><section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2>The <em>Geographic Data problem</em></h2>
+    <p>or</p>
+    <p><strong>Spacial is Special</strong></p>
+
+    </div>
+    </div>
+    </div></section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="GEO-Problem?">GEO Problem?<a class="anchor-link" href="#GEO-Problem?">&#182;</a></h2><p><img src="img/orly.jpg" alt="ORLY"></p>
+    <p>You have to deal with data that has special rules.</p>
+    <p>Rules based on a reality not told in schools</p>
+
+    </div>
+    </div>
+    </div></section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="Earth-is-not-a-sphere">Earth is not a sphere<a class="anchor-link" href="#Earth-is-not-a-sphere">&#182;</a></h2><p><img src="img/sphere.jpg" alt="Typical representation of the Earth as sphere"></p>
+
+    </div>
+    </div>
+    </div></section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="Earth-is-more-like-a-potato">Earth is more like a potato<a class="anchor-link" href="#Earth-is-more-like-a-potato">&#182;</a></h2><p><img src="img/potato.jpg" alt="Image of a free range potato"></p>
+
+    </div>
+    </div>
+    </div></section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="A-potato">A potato<a class="anchor-link" href="#A-potato">&#182;</a></h2><p>Believe me, I know what I'm talking about</p>
+    <p><img src="img/geoide.jpg" alt="Image of a geoid"></p>
+
+    </div>
+    </div>
+    </div></section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="Geoids-are-physical">Geoids are physical<a class="anchor-link" href="#Geoids-are-physical">&#182;</a></h2><p>Although its the true shape of the Earth, we can't measure over it.</p>
+    <p><img src="img/nomeasure.jpg" alt="No measure is possible"></p>
+
+    </div>
+    </div>
+    </div></section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="We-need-mathematics">We need mathematics<a class="anchor-link" href="#We-need-mathematics">&#182;</a></h2><p>An <strong>Ellipsoid</strong></p>
+    <p><img src="img/ellipsoid.jpg" alt="Image of an ellipsoid"></p>
+
+    </div>
+    </div>
+    </div></section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="Ellipsoid-vs-Geoid">Ellipsoid vs Geoid<a class="anchor-link" href="#Ellipsoid-vs-Geoid">&#182;</a></h2><p>On average, they are quite similar</p>
+    <p><img src="img/ellip_vs_geoid.jpg" alt="Ellipsoid compared to geoid"></p>
+
+    </div>
+    </div>
+    </div></section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="Datum-is-the-name-of-the-game">Datum is the name of the game<a class="anchor-link" href="#Datum-is-the-name-of-the-game">&#182;</a></h2><p>The Ellipsoid and a couple more of things is what we call:</p>
+    <h3 id="the-DATUM">the <strong>DATUM</strong><a class="anchor-link" href="#the-DATUM">&#182;</a></h3><p>(And there are not one but several Datums, understanding this takes several courses of Geodesy, trust me on this)</p>
+
+    </div>
+    </div>
+    </div></section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="Earth-is-not-a-sphere">Earth is not a sphere<a class="anchor-link" href="#Earth-is-not-a-sphere">&#182;</a></h2><p><em>Remember</em></p>
+    <blockquote><p>The <strong>GEO</strong> information lays over something <em>mathematical</em> that has its own rules.</p>
+    <p><strong>THE DATUM</strong></p>
+    </blockquote>
+
+    </div>
+    </div>
+    </div></section></section><section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="Maps-are-flat">Maps are flat<a class="anchor-link" href="#Maps-are-flat">&#182;</a></h2><p><img src="img/flat_screen.jpg" alt="Image of a flat screen with a map"></p>
+
+    </div>
+    </div>
+    </div></section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="Making-things-flat">Making things flat<a class="anchor-link" href="#Making-things-flat">&#182;</a></h2><p>But you can't turn <strong>flat</strong> something spherical</p>
+    <p>(without breaking it)</p>
+    <p><img src="img/orange_map.jpg" alt="Image of a map on an orange skin"></p>
+
+    </div>
+    </div>
+    </div></section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="Breaking-Flat">Breaking Flat<a class="anchor-link" href="#Breaking-Flat">&#182;</a></h2><p>You have to choose what you want to <em>break</em>:</p>
+    <ul>
+    <li><strong>Areas</strong></li>
+    <li><strong>Angles</strong></li>
+    <li><strong>Distances</strong></li>
+    </ul>
+    <p>In the best case you can choose two of the three.</p>
+    <p>(I'm skipping several courses on Cartography with this slide, trust me on this)</p>
+
+    </div>
+    </div>
+    </div></section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="Choose-your-weapon!:-The-Projection">Choose your weapon!: The Projection<a class="anchor-link" href="#Choose-your-weapon!:-The-Projection">&#182;</a></h2><p>Cartographers have tricks for breaking things <strong>mathematically</strong></p>
+    <p><a href="https://xkcd.com/977/"><img src="img/map_projections.jpg" alt="xkcd on map projections"></a></p>
+
+    </div>
+    </div>
+    </div></section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="Maps-are-flat">Maps are flat<a class="anchor-link" href="#Maps-are-flat">&#182;</a></h2><p><em>Remember</em></p>
+    <blockquote><p>The <strong>GEO</strong> information uses a <em>mathematical</em> trick to make things <strong>flat</strong> orderly.</p>
+    <p><strong>THE PROJECTION</strong></p>
+    </blockquote>
+
+    </div>
+    </div>
+    </div></section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="SRS-and-CRS">SRS and CRS<a class="anchor-link" href="#SRS-and-CRS">&#182;</a></h2><p>Toghether a <em>DATUM</em> and a <em>PROJECTION</em> make a <strong>CRS</strong></p>
+    <p>The most famous catalog of <em>CRS</em> is <strong>EPSG</strong></p>
+    <ul>
+    <li>EPSG:4326</li>
+    <li>EPSG:3857 or EPSG:900913</li>
+    <li>EPSG:4258</li>
+    <li>EPSG:25830, EPSG:25831</li>
+    </ul>
+
+    </div>
+    </div>
+    </div></section></section><section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="Geo-data-types">Geo data types<a class="anchor-link" href="#Geo-data-types">&#182;</a></h2><p>These one are easy</p>
+    <p>Because you are more used to it</p>
+
+    </div>
+    </div>
+    </div></section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="Raster-and-Vector-data">Raster and Vector data<a class="anchor-link" href="#Raster-and-Vector-data">&#182;</a></h2><p><img src="img/raster_data.jpg" alt="Raster data model"></p>
+    <p><img src="img/vector_data.jpg" alt="Vector data model"></p>
+
+    </div>
+    </div>
+    </div></section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="Data-model">Data model<a class="anchor-link" href="#Data-model">&#182;</a></h2><p>How many geometry types do you know?</p>
+    <p>... Point, Line, Surface ...</p>
+
+    </div>
+    </div>
+    </div></section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="Well,-it's-complicated...">Well, it's complicated...<a class="anchor-link" href="#Well,-it's-complicated...">&#182;</a></h2><p>OGC <strong>Simple</strong> Feature Access</p>
+    <p><img src="img/ogc_sfs.jpg" alt="OGC Simple Feature Specification"></p>
+
+    </div>
+    </div>
+    </div></section></section><section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="lon/lat-vs-lat/lon">lon/lat vs lat/lon<a class="anchor-link" href="#lon/lat-vs-lat/lon">&#182;</a></h2><p>There's a little bit of fuss</p>
+    <p>In theory it should be lon/lat (x,y)</p>
+    <p>But we are used to lat/lon</p>
+
+    </div>
+    </div>
+    </div><div class="fragment">
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <p><strong>Always check things ... twice</strong></p>
+
+    </div>
+    </div>
+    </div></div></section></section><section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="Recap">Recap<a class="anchor-link" href="#Recap">&#182;</a></h2><ul>
+    <li>Know your <strong>Datum</strong></li>
+    <li>Know your <strong>Projection</strong></li>
+    <li>Know your <strong>Data Type</strong></li>
+    <li>Know your <strong>Model</strong></li>
+    </ul>
+
+    </div>
+    </div>
+    </div><div class="fragment">
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <p><strong>KNOW YOUR (geo) DATA!!!</strong></p>
+
+    </div>
+    </div>
+    </div></div></section></section>
+
+    <section><section>
+    <div class="cell border-box-sizing text_cell rendered">
+    <div class="prompt input_prompt">
+    </div>
+    <div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h1 id="That's-all-folks!">That's all folks!<a class="anchor-link" href="#That's-all-folks!">&#182;</a></h1><h2 id="Thanks!-Questions?">Thanks! Questions?<a class="anchor-link" href="#Thanks!-Questions?">&#182;</a></h2>
+    </div> </div></div></section></section>
+
+    <section><section>
+            <div> Based on the <strong>«Geospatial analysis with Python»</strong> a talk by</div>
+    <ul>
+    <li>Pedro-Juan Ferrer · <a href="http://twitter.com/vehrka">@vehrka</a></li>
+    <li>Jorge Sanz - <a href="http://twitter.com/xurxosanz">@xurxosanz</a></li>
+    <li>Geoinquietos Valencia - <a href="http://twitter.com/geoinquietosvlc">@geoinquietosvlc</a></li>
+    </ul>
+    <p>Slides and repo</p>
+    <ul>
+    <li><a href="http://bit.ly/pycones2015-geo">http://bit.ly/pycones2015-geo</a></li>
+    <li><a href="https://github.com/geoinquietosvlc/2015.es.pycon">https://github.com/geoinquietosvlc/2015.es.pycon</a></li>
+    </ul>
+
+    </section></section>
+    </div>
+    </div>
+<script>
+
+    require(
+        {
+          // it makes sense to wait a little bit when you are loading
+          // reveal from a cdn in a slow connection environment
+          waitSeconds: 15
+        },
+        [
+          "reveal.js/lib/js/head.min.js",
+          "reveal.js/js/reveal.js"
+        ],
+
+        function(head, Reveal){
+
+            // Full list of configuration options available here: https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: "reveal.js/lib/js/classList.js",
+                      condition: function() { return !document.body.classList; } },
+                    { src: "reveal.js/plugin/notes/notes.js",
+                      async: true,
+                      condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+            var update = function(event){
+              if(MathJax.Hub.getAllJax(Reveal.getCurrentSlide())){
+                MathJax.Hub.Rerender(Reveal.getCurrentSlide());
+              }
+            };
+
+            Reveal.addEventListener('slidechanged', update);
+
+            var update_scroll = function(event){
+              $(".reveal").scrollTop(0);
+            };
+
+            Reveal.addEventListener('slidechanged', update_scroll);
+
+        }
+    );
+
+    </script>
+
+</body>
+
+</html>
